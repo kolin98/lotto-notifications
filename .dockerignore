@@ -1,0 +1,7 @@
+data/
+.env
+.env.example
+.git/
+.gitignore
+deployment/
+build/
