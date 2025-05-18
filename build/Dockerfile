@@ -2,12 +2,12 @@
 FROM golang:1.24-alpine AS builder
 WORKDIR /app
 
-RUN apk add --no-cache git
+RUN apk add --no-cache git gcc musl-dev sqlite-dev
 COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -o /app/worker ./cmd/worker
+RUN CGO_ENABLED=1 GOOS=linux go build -o /app/worker ./cmd/worker
 
 # Run
 FROM alpine:latest
