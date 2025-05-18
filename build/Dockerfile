@@ -15,5 +15,8 @@ WORKDIR /app
 
 COPY --from=builder /app/worker .
 
-RUN adduser -D -g '' appuser
+RUN adduser -D -g '' appuser \
+    && chown -R appuser:appuser /app \
+    && chmod -R 700 /app
+
 USER appuser
